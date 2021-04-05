@@ -1,0 +1,39 @@
+{
+    "membres" : [
+        {
+            "pseudo" : "root",
+            "prenom" : "root",
+            "nom" : "root",
+            "email" : "root",
+            "mot_de_passe" : "root"
+        },
+        {
+            "pseudo" : "Johnnn21",
+            "prenom" : "John",
+            "nom" : "Doe",
+            "email" : "john@doe.fr",
+            "mot_de_passe" : "johndoe"
+        },
+        {
+            "pseudo" : "J4n3",
+            "prenom" : "Jane",
+            "nom" : "Doe",
+            "email" : "jane@doe.fr",
+            "mot_de_passe" : "janedoe"
+        },
+        {
+            "pseudo" : "Jok",
+            "prenom" : "Jake",
+            "nom" : "Doe",
+            "email" : "jake@doe.fr",
+            "mot_de_passe" : "jakedoe"
+        },
+        {
+            "pseudo" : "XxJhinxX",
+            "prenom" : "Jhin",
+            "nom" : "Doe",
+            "email" : "jhin@doe.fr",
+            "mot_de_passe" : "jhindoe"
+        }
+    ]
+}
