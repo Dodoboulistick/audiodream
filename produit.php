@@ -28,15 +28,8 @@ require("varSession.inc.php");
 
                 <div class="divider"></div>
 
-                <?php 
-                    //récupération des produits
-                    $queryProduit = "SELECT * FROM produit WHERE idCat=(
-                        SELECT idCat FROM categorie WHERE nom=:nomCategorie
-                    )";
-                    $reponse = $bdd->prepare($queryProduit);
-                    $reponse->bindParam(':nomCategorie', $categorie);
-                    $reponse->execute();
-
+                <?php
+                    //$produit est une requete de bdd.php
                     //initialisation du compteur, puis affichage des produits 1 à 1
                     $i=0;
                     while ($produit = $reponse->fetch()){

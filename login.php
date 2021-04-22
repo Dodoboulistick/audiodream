@@ -4,9 +4,6 @@ session_start();
 
 //récupération de la liste des membres depuis la bdd
 require('bdd.php');
-  $queryUser = "SELECT mail,motDePasse FROM utilisateur";
-  $reponseUser = $bdd->query($queryUser);
-
 
 if(isset($_SESSION["isConnected"])){
   header('Location: produit.php');
@@ -73,7 +70,7 @@ function verifyInput($var){
     
     <main class="form-signin">
       <form method="post">
-        <img class="mb-4" src="img/accueil/logo-accueil.png" alt="" width="72" height="57">
+        <a href="index.php"><img class="mb-4" src="img/accueil/logo-accueil.png" alt="" width="72" height="57"></a>
         <h1 class="h3 mb-3 fw-bold">Connectez-vous</h1>
 
         <div class="form-floating">
