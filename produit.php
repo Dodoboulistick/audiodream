@@ -29,9 +29,17 @@ require("varSession.inc.php");
                 <div class="divider"></div>
 
                 <?php 
-                    //sizeof() nous donne le nombre de produits dans une catégorie donnée
-                    //La fonctionnalité "row" de bootstrap nous force à les traiter deux par deux
-                    for($i=0;$i<sizeof($_SESSION["$categorie"]);$i ++){
+                    //récupération des produits
+                    $queryProduit = "SELECT * FROM produit WHERE idCat=(
+                        SELECT idCat FROM categorie WHERE nom=:nomCategorie
+                    )";
+                    $reponse = $bdd->prepare($queryProduit);
+                    $reponse->bindParam(':nomCategorie', $categorie);
+                    $reponse->execute();
+
+                    //initialisation du compteur, puis affichage des produits 1 à 1
+                    $i=0;
+                    while ($produit = $reponse->fetch()){
                         if($i%2 == 0){?>
                             <div class="row justify-content-evenly">
                             <!-- Premier produit de la row -->
@@ -40,14 +48,14 @@ require("varSession.inc.php");
                                         <div class="carte-img">
                                             <!-- Categorie porte le nom de la catégorie dans la variable de session via GET
                                             $_SESSION["$categorie"] est le tableau importé de json qui porte un tableau de produits de ladite catégorie -->
-                                            <img class="img-zoom" src="img/<?php echo $categorie ?>/<?php echo $_SESSION["$categorie"][$i]["imgurl"]; ?>" />
+                                            <img class="img-zoom" src="img/<?php echo $categorie ?>/<?php echo $produit['img'];; ?>" />
                                         </div>
                                         <div class="carte-text">
-                                            <h2 class="my-4"><?php echo $_SESSION["$categorie"][$i]["nom"]; ?></h2>
+                                            <h2 class="my-4"><?php echo $produit['nomP']; ?></h2>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum, elit eu maximus varius, urna nisi consequat quam, fermentum commodo urna mauris vel purus. Donec sed aliquam nunc, nec semper libero.</p>
-                                            <p class="prix fw-bold fst-italic">Prix : <?php echo $_SESSION["$categorie"][$i]["prix"]; ?> €</p>
+                                            <p class="prix fw-bold fst-italic">Prix : <?php echo $produit['prix']; ?> €</p>
                                             <div class="button-group">
-                                                <a class="full-btn" href="panier.php?action=ajout&amp;l=<?php echo $_SESSION["$categorie"][$i]["nom"]; ?>&amp;q=1&amp;p=<?php echo $_SESSION["$categorie"][$i]["prix"]; ?>">Ajouter au panier</a>
+                                                <a class="full-btn" href="#">Ajouter au panier</a>
                                             </div>
                                         </div>
                                     </div>
@@ -57,21 +65,24 @@ require("varSession.inc.php");
                                 <div class="col-lg-4">
                                     <div class="carte">
                                         <div class="carte-img">
-                                            <img class="img-zoom" src="img/<?php echo $categorie ?>/<?php echo $_SESSION["$categorie"][$i]["imgurl"]; ?>" />
+                                            <img class="img-zoom" src="img/<?php echo $categorie ?>/<?php echo $produit['img']; ?>" />
                                         </div>
                                         <div class="carte-text">
-                                            <h2 class="my-4"><?php echo $_SESSION["$categorie"][$i]["nom"]; ?></h2>
+                                            <h2 class="my-4"><?php echo $produit['nomP']; ?></h2>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum, elit eu maximus varius, urna nisi consequat quam, fermentum commodo urna mauris vel purus. Donec sed aliquam nunc, nec semper libero.</p>
-                                            <p class="prix fw-bold fst-italic">Prix : <?php echo $_SESSION["$categorie"][$i]["prix"]; ?> €</p>
+                                            <p class="prix fw-bold fst-italic">Prix : <?php echo $produit['prix']; ?> €</p>
                                             <div class="button-group">
-                                                <a class="full-btn" href="panier.php?action=ajout&amp;l=<?php echo $_SESSION["$categorie"][$i]["nom"]; ?>&amp;q=1&amp;p=<?php echo $_SESSION["$categorie"][$i]["prix"]; ?>">Ajouter au panier</a>
+                                                <a class="full-btn" href="#">Ajouter au panier</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    <?php } 
-                } ?>
+                    <?php }
+                    $i++;
+                }
+                $reponse->closeCursor();
+                ?>
             </div>
         </section>
 

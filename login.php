@@ -2,11 +2,11 @@
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
 
-//récupération de la liste des membres depuis le .json
-$url="application/donnees_utilisateurs.json";
-$json = file_get_contents($url);
-$donnees_brutes = json_decode($json, true);
-$membres = $donnees_brutes["membres"];
+//récupération de la liste des membres depuis la bdd
+require('bdd.php');
+  $queryUser = "SELECT mail,motDePasse FROM utilisateur";
+  $reponseUser = $bdd->query($queryUser);
+
 
 if(isset($_SESSION["isConnected"])){
   header('Location: produit.php');
@@ -17,8 +17,8 @@ if(isset($_SESSION["isConnected"])){
     $mot_de_passe = verifyInput($_POST["signin_mdp"]);
 
     //vérification des données
-    foreach($membres as $value){
-      if ($email == $value["email"] && $mot_de_passe == $value["mot_de_passe"]){
+    while ($usr = $reponseUser->fetch()){
+      if ($email == $usr['mail'] && $mot_de_passe == $usr['motDePasse']){
         $_SESSION["utilisateur"] = $value["pseudo"];
         $_SESSION["isConnected"] = true;
         header('Location: produit.php');
@@ -26,7 +26,7 @@ if(isset($_SESSION["isConnected"])){
     }
   }
 }
-
+$reponseUser->closeCursor();
 
 
 function verifyInput($var){

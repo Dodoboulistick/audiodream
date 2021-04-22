@@ -6,15 +6,15 @@ DROP TABLE Appartenir;
 
 CREATE TABLE Categorie(
     idCat INT NOT NULL AUTO_INCREMENT,
-    nom VARCHAR(20),
+    nom VARCHAR(255),
     PRIMARY KEY(idCat)
 );
 
 CREATE TABLE Produit(
     idProduit INT NOT NULL AUTO_INCREMENT,
-    nomP VARCHAR(20),  
+    nomP VARCHAR(255),  
     prix INT,
-    img VARCHAR(20),
+    img VARCHAR(255),
     stock INT,
     idCat INT,
     PRIMARY KEY(idProduit),
@@ -22,17 +22,18 @@ CREATE TABLE Produit(
 );
 
 CREATE TABLE Utilisateur(
-    pseudo VARCHAR(25) NOT NULL,
-    prenom VARCHAR(20),
-    nom VARCHAR(20),  
-    mail VARCHAR(100),
-    motDePasse VARCHAR(50),
-    PRIMARY KEY(pseudo)
+    idUtilisateur INT NOT NULL AUTO_INCREMENT,
+    pseudo VARCHAR(255) NOT NULL,
+    prenom VARCHAR(255),
+    nom VARCHAR(255),  
+    mail VARCHAR(255),
+    motDePasse VARCHAR(255),
+    PRIMARY KEY(idUtilisateur)
 );
 
 CREATE TABLE Commande(
     idCommande INT NOT NULL,
-    pseudo VARCHAR(25),
+    pseudo VARCHAR(255),
     PRIMARY KEY(idCommande),
     FOREIGN KEY fk_utilisateur(pseudo) REFERENCES Utilisateur(pseudo)
 );
