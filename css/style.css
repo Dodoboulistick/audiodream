@@ -317,7 +317,10 @@ vertical-align: -webkit-baseline-middle;
 
 .maCommande{
   padding-top: 0 !important;
-  display: inline-block;
+}
+
+.maCommande p{
+  display: inline-block !important;
 }
 
 .qte{

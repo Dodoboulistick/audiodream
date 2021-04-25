@@ -50,7 +50,7 @@ require("varSession.inc.php");
                                             <div class="scriptCommande cache">
                                                 <p class="qte">Restants :<span class="mx-2 restant"><?= $produit['stock']; ?></span></p><br>
                                                 <span class="maCommande">
-                                                    <p>Ma commande : <span class="nbCommande mx-2">0</span></p>
+                                                    <p>Ma commande :<span class="nbCommande mx-2">0</span></p>
                                                     <a href="#" class="btn btn-sm btn-outline-danger moins disabled"> - </a>
                                                     <a href="#" class="btn btn-sm btn-outline-danger plus">+</a>
                                                 </span>
@@ -76,7 +76,7 @@ require("varSession.inc.php");
                                             <div class="scriptCommande cache">
                                                 <p class="qte">Restants :<span class="mx-2 restant"><?= $produit['stock']; ?></span></p><br>
                                                 <span class="maCommande">
-                                                    <p>Ma commande : <span class="nbCommande mx-2">0</span></p>
+                                                    <p>Ma commande :<span class="nbCommande mx-2">0</span></p>
                                                     <a href="#" class="btn btn-sm btn-outline-danger moins disabled"> - </a>
                                                     <a href="#" class="btn btn-sm btn-outline-danger plus">+</a>
                                                 </span>
