@@ -41,7 +41,7 @@ require("varSession.inc.php");
                                         <div class="carte-img">
                                             <!-- Categorie porte le nom de la catégorie dans la variable de session via GET
                                             $_SESSION["$categorie"] est le tableau importé de json qui porte un tableau de produits de ladite catégorie -->
-                                            <img class="img-zoom" src="img/<?php echo $categorie ?>/<?php echo $produit['img'];; ?>" />
+                                            <img class="img-zoom" src="img/<?php echo $categorie ?>/<?php echo $produit['img']; ?>" />
                                         </div>
                                         <div class="carte-text">
                                             <h2 class="my-4"><?php echo $produit['nomP']; ?></h2>
