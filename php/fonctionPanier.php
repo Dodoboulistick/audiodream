@@ -4,7 +4,7 @@ require("bdd.php");
 
 function ajouterArticle($idProd,$qteP){
    //Si le produit existe déjà on ajoute seulement la quantité
-   $queryProduit = "SELECT count(*) FROM Appartenir WHERE idCommande=1 AND idProduit=$idProd";
+   $queryProduit = "SELECT count(*) FROM appartenir WHERE idCommande=1 AND idProduit=$idProd";
    $reponseProduit = $bdd->query($queryProduit);
    if ($$reponseProduit == 0){//si le produit n'y est pas
       $queryProduit = "INSERT INTO appartenir VALUES (1,$idProd,$qteP)";
