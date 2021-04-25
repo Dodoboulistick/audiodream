@@ -98,7 +98,9 @@ require("varSession.inc.php");
         </section>
 
         <!-- Pied de page (footer) -->
-        <?php require("php/footer.php"); ?>
+        <?php require("php/footer.php"); 
+            Database::disconnect();
+        ?>
     </body>
 
     <script type="text/javascript" src="js/script.js" ></script>
