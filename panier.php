@@ -35,25 +35,22 @@ session_start();
                 </tr>
 
                 <?php
-                if (creationPanier()){
-                    $nbArticles=count($_SESSION['panier']['libelleProduit']);
-                    if ($nbArticles <= 0){
-                    echo "<tr><td>Votre panier est vide </td></tr>";
-                    }else{
-                        for ($i=0 ;$i < $nbArticles ; $i++){
-                            echo "<tr>";
-                            echo "<td>".htmlspecialchars($_SESSION['panier']['libelleProduit'][$i])."</ td>";
-                            echo "<td>".htmlspecialchars($_SESSION['panier']['qteProduit'][$i])."</td>";
-                            echo "<td>".htmlspecialchars($_SESSION['panier']['prixProduit'][$i])." &euro;</td>";
-                            echo "<td>".htmlspecialchars($_SESSION['panier']['qteProduit'][$i]*$_SESSION['panier']['prixProduit'][$i])." &euro;</td>";
-                            echo "<td><a href=\"".htmlspecialchars("panier.php?action=suppression&l=".rawurlencode($_SESSION['panier']['libelleProduit'][$i]))."\">Retirer</a></td>";
-                            echo "</tr>";
-                        }
-
-                        echo "<tr><td colspan=\"4\">";
-                        echo "</td></tr>";
+                    $reponse = $bdd->query('SELECT nom, quantite, prix 
+                    FROM Produit p, Appartenir a
+                    WHERE a.idProduit = p.idProduit AND idCommande=1;');
+                    while ($donnees = $reponse->fetch()){
+                        echo "<tr>";
+                        echo "<td>".$donnees['nom']."</ td>";
+                        echo "<td>".$donnees['quantite']."</td>";
+                        echo "<td>".$donnees['prix']." &euro;</td>";
+                        echo "<td>".$donnees['prix']*$donnees['quantite']." &euro;</td>";
+                        echo "<td><a>Retirer</a></td>";
+                        echo "</tr>";
                     }
-                }
+                    echo "<tr><td colspan=\"4\">";
+                    echo "</td></tr>";
+                    
+                
                 ?>
             </table>
             <div class="text-center">
