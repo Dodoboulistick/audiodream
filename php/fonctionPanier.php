@@ -17,7 +17,7 @@ function ajouterArticle($idProd,$qteP){
 
 }
 
-function supprimerArticle($libelleProduit){
+function supprimerArticle($idProd){
    $queryProduit = "DELETE FROM appartenir WHERE idCommande=1 AND idProduit=$idProd";
    $reponseProduit = $bdd->query($queryProduit);
 }
