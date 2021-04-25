@@ -57,7 +57,7 @@ require("varSession.inc.php");
                                             </div>
                                             <div class="button-group">
                                                 <a href="#" class="empty-btn stock">Stock</a>
-                                                <a class="full-btn" href="#">Ajouter au panier</a>
+                                                <a class="full-btn ajouterpanier" href="#" id="<?= $produit['idProduit']; ?>">Ajouter au panier</a>
                                             </div>
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@ require("varSession.inc.php");
                                             </div>
                                             <div class="button-group">
                                                 <a href="#" class="empty-btn stock">Stock</a>
-                                                <a class="full-btn" href="#">Ajouter au panier</a>
+                                                <a class="full-btn ajouterpanier" href="#" id="<?= $produit['idProduit']; ?>">Ajouter au panier</a>
                                             </div>
                                         </div>
                                     </div>
@@ -104,4 +104,5 @@ require("varSession.inc.php");
     </body>
 
     <script type="text/javascript" src="js/script.js" ></script>
+    <script type="text/javascript" src="js/stock.js" ></script>
 </html>
