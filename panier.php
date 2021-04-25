@@ -8,10 +8,10 @@ require("bdd.php");
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="img/accueil/favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
     <title>Audio Dream - Panier</title>
 </head>
 
@@ -26,7 +26,7 @@ require("bdd.php");
         <div class="divider"></div>
         <div class="row justify-content-evenly">
             <table class="table table-hover">
-                <thead>
+                <thead class="table-secondary">
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Libellé</th>
@@ -59,7 +59,8 @@ require("bdd.php");
                     $cpt++;
                     $nbArticles += $donnees['quantite'];
                     $prixTotal += $donnees['prix']*$donnees['quantite'];
-                    }?>
+                    }
+                    ?>
                 </tbody>
             </table>
 

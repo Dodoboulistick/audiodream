@@ -13,7 +13,7 @@ CREATE TABLE Categorie(
 CREATE TABLE Produit(
     idProduit INT NOT NULL AUTO_INCREMENT,
     nomP VARCHAR(255),  
-    prix INT,
+    prix FLOAT,
     img VARCHAR(255),
     stock INT,
     idCat INT,

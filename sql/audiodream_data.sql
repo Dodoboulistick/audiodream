@@ -15,7 +15,7 @@ INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("Marshall Minor II", 6
 INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("JBL Tine 205BT Noir", 29.95, "jbl.jpg", 2, 2);
 INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("Sony WI-XB400", 54.99, "sony.jpg", 3, 2);
 INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("Beats Pill XL", 199.95, "beats.jpg", 1, 3);
-INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("Bose SoundLink Revolve série II", 199.95, "bose.jpg", 3, 3);
+INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("Bose SoundLink Revolve serie II", 199.95, "bose.jpg", 3, 3);
 INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("JBL charge 4", 124.99, "jbl.jpeg", 2, 3);
 INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("Sony SRS-XB20", 79.50, "sony.jpg", 4, 3);
 INSERT INTO produit(nomP, prix, img, stock, idCat) VALUES("Marshall Acton II", 249.00, "marshall.jpg", 1, 3);
