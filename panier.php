@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("bdd.php");
+require("php/fonctionPanier.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,7 +40,7 @@ require("bdd.php");
                 <tbody>
                 <?php
                     $reponse = $bdd->query('SELECT nomP, quantite, prix 
-                    FROM Produit p, Appartenir a
+                    FROM produit p, appartenir a
                     WHERE a.idProduit = p.idProduit AND idCommande=1;');
                     $nbArticles = 0;
                     $prixTotal = 0;
