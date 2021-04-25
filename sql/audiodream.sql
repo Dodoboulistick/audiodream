@@ -1,16 +1,16 @@
-DROP TABLE Categorie;
-DROP TABLE Produit;
-DROP TABLE Utilisateur;
-DROP TABLE Commande;
-DROP TABLE Appartenir;
+DROP TABLE categorie;
+DROP TABLE produit;
+DROP TABLE utilisateur;
+DROP TABLE commande;
+DROP TABLE appartenir;
 
-CREATE TABLE Categorie(
+CREATE TABLE categorie(
     idCat INT NOT NULL AUTO_INCREMENT,
     nom VARCHAR(255),
     PRIMARY KEY(idCat)
 );
 
-CREATE TABLE Produit(
+CREATE TABLE produit(
     idProduit INT NOT NULL AUTO_INCREMENT,
     nomP VARCHAR(255),  
     prix FLOAT,
@@ -18,10 +18,10 @@ CREATE TABLE Produit(
     stock INT,
     idCat INT,
     PRIMARY KEY(idProduit),
-    FOREIGN KEY fk_categorie(idCat) REFERENCES Categorie(idCat)
+    FOREIGN KEY fk_categorie(idCat) REFERENCES categorie(idCat)
 );
 
-CREATE TABLE Utilisateur(
+CREATE TABLE utilisateur(
     idUtilisateur INT NOT NULL AUTO_INCREMENT,
     pseudo VARCHAR(255) NOT NULL,
     prenom VARCHAR(255),
@@ -31,18 +31,18 @@ CREATE TABLE Utilisateur(
     PRIMARY KEY(idUtilisateur)
 );
 
-CREATE TABLE Commande(
+CREATE TABLE commande(
     idCommande INT NOT NULL,
-    pseudo VARCHAR(255),
+    idUtilisateur INT NOT NULL,
     PRIMARY KEY(idCommande),
-    FOREIGN KEY fk_utilisateur(pseudo) REFERENCES Utilisateur(pseudo)
+    FOREIGN KEY fk_utilisateur(idUtilisateur) REFERENCES utilisateur(idUtilisateur)
 );
 
-CREATE TABLE Appartenir(
+CREATE TABLE appartenir(
     idCommande INT NOT NULL,
     idProduit INT NOT NULL,
     quantite INT,  
     PRIMARY KEY(idCommande,idProduit),
-    FOREIGN KEY fk_commande(idCommande) REFERENCES Commande(idCommande),
-    FOREIGN KEY fk_produit(idProduit) REFERENCES Produit(idProduit)
+    FOREIGN KEY fk_commande(idCommande) REFERENCES commande(idCommande),
+    FOREIGN KEY fk_produit(idProduit) REFERENCES produit(idProduit)
 );
