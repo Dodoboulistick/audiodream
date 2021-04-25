@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("bdd.php");
+require("php/fonctionPanier.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -1,54 +1,21 @@
 <?php
 
-$url="application/donnees_produits.json";
-$json = file_get_contents($url);
-$produits = json_decode($json, true);
-$listeArticle = array();
-$categories = array ('casques', 'ecouteurs', 'enceintes', 'hifi');
-foreach($categories as $element){
-   for($i=0;$i<sizeof($produits['categorie'][0][$element]);$i ++){
-      array_push($listeArticle,$produits['categorie'][0][$element][$i]['nom']);
-   }
-}
+require("bdd.php");
 
-function creationPanier(){
-   if (!isset($_SESSION['panier'])){
-      $_SESSION['panier']=array();
-      $_SESSION['panier']['libelleProduit'] = array();
-      $_SESSION['panier']['qteProduit'] = array();
-      $_SESSION['panier']['prixProduit'] = array();
+function ajouterArticle($idProd,$qteProduit){
+   //Si le produit existe déjà on ajoute seulement la quantité
+   $queryProduit = "SELECT count(*) FROM Appartenir WHERE idCommande=1 AND idProduit=$idProd";
+   $reponseProduit = $bdd->query($queryProduit);
+   if ($$reponseProduit == 0){//si le produit n'y est pas
+      $queryProduit = "INSERT INTO appartenir $idProd";
+      $reponseProduit = $bdd->query($queryProduit);
+   }else{
+      //Sinon on ajoute le produit
+      array_push( $_SESSION['panier']['libelleProduit'],$libelleProduit);
+      array_push( $_SESSION['panier']['qteProduit'],$qteProduit);
+      array_push( $_SESSION['panier']['prixProduit'],$prixProduit);
    }
-   return true;
-}
 
-function existeArticle($nom){
-   global $listeArticle;
-   $est = false;
-   foreach($listeArticle as $article){
-      if($nom == $article){
-         $est = true;
-      }
-   }
-   return($est);
-}
-
-
-function ajouterArticle($libelleProduit,$qteProduit,$prixProduit){
-    //Si le panier existe
-   if (creationPanier()){
-      //Si le produit existe déjà on ajoute seulement la quantité
-      $positionProduit = array_search($libelleProduit, $_SESSION['panier']['libelleProduit']);
-      if (existeArticle($libelleProduit)){
-         if ($positionProduit > -1){
-            $_SESSION['panier']['qteProduit'][$positionProduit] += $qteProduit ;
-         }else{
-            //Sinon on ajoute le produit
-            array_push( $_SESSION['panier']['libelleProduit'],$libelleProduit);
-            array_push( $_SESSION['panier']['qteProduit'],$qteProduit);
-            array_push( $_SESSION['panier']['prixProduit'],$prixProduit);
-         }
-      }
-   }
 }
 
 function supprimerArticle($libelleProduit){
@@ -76,32 +43,5 @@ function supprimerArticle($libelleProduit){
    }
 }
 
-function MontantGlobal(){
-   $total=0;
-   for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++){
-      $total += $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
-   }
-   return $total;
-}
-
-function QuantiteGlobal(){
-   $qtTotal=0;
-   for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++){
-      $qtTotal += $_SESSION['panier']['qteProduit'][$i];
-   }
-   return $qtTotal;
-}
-
-function compterArticles(){
-   if (isset($_SESSION['panier'])){
-      return count($_SESSION['panier']['libelleProduit']);
-   }else{
-      return 0;
-   }
-}
-
-function supprimePanier(){
-   unset($_SESSION['panier']);
-}
 
 ?>
