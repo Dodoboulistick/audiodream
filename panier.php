@@ -1,6 +1,6 @@
 <?php
 session_start();
-    require("varSession.inc.php");
+require("bdd.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -9,8 +9,8 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="shortcut icon" type="image/x-icon" href="img/accueil/favicon.ico">
     <title>Audio Dream - Panier</title>
 </head>
@@ -25,37 +25,47 @@ session_start();
         <h1>Mon panier</h1>
         <div class="divider"></div>
         <div class="row justify-content-evenly">
-            <table>
-                <tr>
-                    <th>Libellé</th>
-                    <th>Quantité</th>
-                    <th>Prix Unitaire</th>
-                    <th>Prix Total</th>
-                    <th>Supprimer</th>
-                </tr>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Libellé</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Prix Unitaire</th>
+                        <th scope="col">Prix Total</th>
+                        <th scope="col">Supprimer</th>
+                    </tr>
+                </thead>
 
+                <tbody>
                 <?php
-                    $reponse = $bdd->query('SELECT nom, quantite, prix 
+                    $reponse = $bdd->query('SELECT nomP, quantite, prix 
                     FROM Produit p, Appartenir a
                     WHERE a.idProduit = p.idProduit AND idCommande=1;');
+                    $nbArticles = 0;
+                    $prixTotal = 0;
+                    $cpt = 1;
                     while ($donnees = $reponse->fetch()){
-                        echo "<tr>";
-                        echo "<td>".$donnees['nom']."</ td>";
-                        echo "<td>".$donnees['quantite']."</td>";
-                        echo "<td>".$donnees['prix']." &euro;</td>";
-                        echo "<td>".$donnees['prix']*$donnees['quantite']." &euro;</td>";
-                        echo "<td><a>Retirer</a></td>";
-                        echo "</tr>";
-                    }
-                    echo "<tr><td colspan=\"4\">";
-                    echo "</td></tr>";
-                    
-                
-                ?>
+                        ?>
+                        <tr>
+                            <th scope="<?= $cpt ?>"><?= $cpt ?></th>
+                            <td><?=$donnees['nomP']?></td>
+                            <td><?=$donnees['quantite']?></td>
+                            <td><?=$donnees['prix']?> &euro;</td>
+                            <td><?=$donnees['prix']*$donnees['quantite']?> &euro;</td>
+                            <td><a>Retirer</a></td>
+                        </tr>
+                    <?php 
+                    $cpt++;
+                    $nbArticles += $donnees['quantite'];
+                    $prixTotal += $donnees['prix']*$donnees['quantite'];
+                    }?>
+                </tbody>
             </table>
+
             <div class="text-center">
-            <p class="total">Prix total :  &euro; </p>
-            <p class="total">Nombre d'article(s) :  </p>
+            <p class="total">Prix total : <?= $prixTotal ?> &euro; </p>
+            <p class="total">Nombre d'article(s) : <?= $nbArticles ?>  </p>
             </div>
         </div>
     </div>
@@ -65,7 +75,8 @@ session_start();
     if(isset($_SESSION["isConnected"])){?>
         <div class="container">
         <div class="divider"></div>
-        <p class="text-center"><a href="logout.php" class="btn btn-danger my-5 text-center">Se déconnecter</a></p>
+        <p class="text-center"><a href="#" class="btn btn-lg btn-danger my-5 text-center">Finaliser la commande</a></p>
+        <p class="text-center"><a href="logout.php" class="btn btn-secondary my-5 text-center">Se déconnecter</a></p>
     </div>
     <?php } ?>
     

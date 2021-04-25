@@ -3,7 +3,7 @@
     $categorie = htmlspecialchars($_GET['cat']);
     $categorie = stripslashes($categorie);
     $categorie = trim($categorie);
-
+    
     //connexion a la bdd
     require('bdd.php');
 
