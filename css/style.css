@@ -311,18 +311,31 @@ vertical-align: -webkit-baseline-middle;
   width: fit-content;
 }
 
-
 .button-group{
   text-align: center;
 }
 
-.scriptCommande p{
+.maCommande{
+  padding-top: 0 !important;
   display: inline-block;
 }
 
-.maCommande{
-  display: inline-block;
+.qte{
+  margin-bottom: 0 !important;
 }
+
+.stock{
+  padding: 8px 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.stock:hover{
+  padding: 12px 18px;
+  text-decoration: none;
+  border: none;
+}
+
 
 
 

@@ -47,7 +47,16 @@ require("varSession.inc.php");
                                             <h2 class="my-4"><?php echo $produit['nomP']; ?></h2>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum, elit eu maximus varius, urna nisi consequat quam, fermentum commodo urna mauris vel purus. Donec sed aliquam nunc, nec semper libero.</p>
                                             <p class="prix fw-bold fst-italic">Prix : <?php echo $produit['prix']; ?> €</p>
+                                            <div class="scriptCommande cache">
+                                                <p class="qte">Restants :<span class="mx-2 restant"><?= $produit['stock']; ?></span></p><br>
+                                                <span class="maCommande">
+                                                    <p>Ma commande : <span class="nbCommande mx-2">0</span></p>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger moins disabled"> - </a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger plus">+</a>
+                                                </span>
+                                            </div>
                                             <div class="button-group">
+                                                <a href="#" class="empty-btn stock">Stock</a>
                                                 <a class="full-btn" href="#">Ajouter au panier</a>
                                             </div>
                                         </div>
@@ -64,7 +73,16 @@ require("varSession.inc.php");
                                             <h2 class="my-4"><?php echo $produit['nomP']; ?></h2>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec condimentum, elit eu maximus varius, urna nisi consequat quam, fermentum commodo urna mauris vel purus. Donec sed aliquam nunc, nec semper libero.</p>
                                             <p class="prix fw-bold fst-italic">Prix : <?php echo $produit['prix']; ?> €</p>
+                                            <div class="scriptCommande cache">
+                                                <p class="qte">Restants :<span class="mx-2 restant"><?= $produit['stock']; ?></span></p><br>
+                                                <span class="maCommande">
+                                                    <p>Ma commande : <span class="nbCommande mx-2">0</span></p>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger moins disabled"> - </a>
+                                                    <a href="#" class="btn btn-sm btn-outline-danger plus">+</a>
+                                                </span>
+                                            </div>
                                             <div class="button-group">
+                                                <a href="#" class="empty-btn stock">Stock</a>
                                                 <a class="full-btn" href="#">Ajouter au panier</a>
                                             </div>
                                         </div>
