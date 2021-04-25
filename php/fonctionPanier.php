@@ -2,18 +2,17 @@
 
 require("bdd.php");
 
-function ajouterArticle($idProd,$qteProduit){
+function ajouterArticle($idProd,$qteP){
    //Si le produit existe déjà on ajoute seulement la quantité
    $queryProduit = "SELECT count(*) FROM Appartenir WHERE idCommande=1 AND idProduit=$idProd";
    $reponseProduit = $bdd->query($queryProduit);
    if ($$reponseProduit == 0){//si le produit n'y est pas
-      $queryProduit = "INSERT INTO appartenir $idProd";
+      $queryProduit = "INSERT INTO appartenir VALUES (1,$idProd,$qteP)";
       $reponseProduit = $bdd->query($queryProduit);
    }else{
-      //Sinon on ajoute le produit
-      array_push( $_SESSION['panier']['libelleProduit'],$libelleProduit);
-      array_push( $_SESSION['panier']['qteProduit'],$qteProduit);
-      array_push( $_SESSION['panier']['prixProduit'],$prixProduit);
+      //Sinon on modifie
+      $queryProduit = "UPDATE INTO appartenir SET quantite=$qteP WHERE idCommande=1 AND idProduit=$idProd";
+      $reponseProduit = $bdd->query($queryProduit);
    }
 
 }
