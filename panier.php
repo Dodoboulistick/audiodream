@@ -64,9 +64,9 @@ require("fonctionPanier.php");
                 </tbody>
             </table>
 
-            <div class="text-center">
-            <p class="total">Prix total : <span class="panierPrixTotal"><?= $prixTotal ?></span> &euro; </p>
-            <p class="total">Nombre d'article(s) : <span class="panierQteTotal"><?= $nbArticles ?></span>  </p>
+            <div class="text-center mt-5">
+            <p class="total fw-bold">Prix total : <span class="panierPrixTotal fw-normal"><?= $prixTotal ?></span> <span class="fw-normal">&euro;</span> </p>
+            <p class="total fw-bold">Nombre d'article(s) : <span class="panierQteTotal fw-normal"><?= $nbArticles ?></span>  </p>
             </div>
         </div>
     </div>

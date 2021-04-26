@@ -1,8 +1,10 @@
-DROP TABLE categorie;
+CREATE DATABASE IF NOT EXISTS audiodream;
+
+/* DROP TABLE categorie;
 DROP TABLE produit;
 DROP TABLE utilisateur;
 DROP TABLE commande;
-DROP TABLE appartenir;
+DROP TABLE appartenir; */
 
 CREATE TABLE categorie(
     idCat INT NOT NULL AUTO_INCREMENT,
