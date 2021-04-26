@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("php/fonctionPanier.php");
+require("fonctionPanier.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -39,7 +39,7 @@ require("php/fonctionPanier.php");
 
                 <tbody>
                 <?php
-                    $reponse = $bdd->query('SELECT nomP, quantite, prix 
+                    $reponse = $bdd->query('SELECT p.idProduit,nomP, quantite, prix 
                     FROM produit p, appartenir a
                     WHERE a.idProduit = p.idProduit AND idCommande=1;');
                     $nbArticles = 0;
@@ -53,7 +53,7 @@ require("php/fonctionPanier.php");
                             <td><?=$donnees['quantite']?></td>
                             <td><?=$donnees['prix']?> &euro;</td>
                             <td><?=$donnees['prix']*$donnees['quantite']?> &euro;</td>
-                            <td><a>Retirer</a></td>
+                            <td><a href="#" class="supprimerProduit text-danger" id="<?= $donnees['idProduit']; ?>">Retirer</a></td>
                         </tr>
                     <?php 
                     $cpt++;
@@ -65,8 +65,8 @@ require("php/fonctionPanier.php");
             </table>
 
             <div class="text-center">
-            <p class="total">Prix total : <?= $prixTotal ?> &euro; </p>
-            <p class="total">Nombre d'article(s) : <?= $nbArticles ?>  </p>
+            <p class="total">Prix total : <span class="panierPrixTotal"><?= $prixTotal ?></span> &euro; </p>
+            <p class="total">Nombre d'article(s) : <span class="panierQteTotal"><?= $nbArticles ?></span>  </p>
             </div>
         </div>
     </div>
@@ -76,14 +76,16 @@ require("php/fonctionPanier.php");
     if(isset($_SESSION["isConnected"])){?>
         <div class="container">
         <div class="divider"></div>
-        <p class="text-center"><a href="#" class="btn btn-lg btn-danger my-5 text-center">Finaliser la commande</a></p>
-        <p class="text-center"><a href="logout.php" class="btn btn-secondary my-5 text-center">Se déconnecter</a></p>
+        <p class="text-center"><a href="#" class="btn btn-lg btn-success mt-4 text-center finaliserCommande">Finaliser la commande</a></p>
+        <p class="text-center"><a href="logout.php" class="btn btn-secondary mt-3 mb-5 text-center">Se déconnecter</a></p>
     </div>
     <?php } ?>
     
     <!-- Pied de page (footer) -->
     <?php require("php/footer.php"); ?>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/script.js" ></script>
+    <script type="text/javascript" src="js/stock.js" ></script>
 </body>
 </html>
