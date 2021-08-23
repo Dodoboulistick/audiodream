@@ -51,6 +51,8 @@ $(function(){
         $('.finaliserCommande').on("click", function(e) {
             e.preventDefault();
             const chemin = e.target.parentNode.parentNode;
+            alert("Merci pour votre commande! Vous allez être redirigé vers l'accueil.");
+            $(location).attr("href","index.php");
                 $.ajax({
                     type: "POST",
                     url: "fonctionPanier.php",
@@ -61,9 +63,7 @@ $(function(){
                         alert("Merci pour votre commande! Vous allez être redirigé vers l'accueil.");
                         $(location).attr("href","index.php");
                     });
-            });
+            }); 
 });
-
-
 
 

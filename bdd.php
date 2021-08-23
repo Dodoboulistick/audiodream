@@ -27,11 +27,11 @@ class Database {
 $bdd = Database::connect();
 
 //REQUETES USER
-$queryUser = "SELECT mail,motDePasse FROM utilisateur";
+$queryUser = "SELECT mail,motDePasse FROM ad_utilisateur";
 $reponseUser = $bdd->query($queryUser);
 
 //REQUETES CATEGORIES
-$queryCategories = "SELECT nom FROM categorie";
+$queryCategories = "SELECT nom FROM ad_categorie";
 $listeCategories= array();
 $reponseCategories = $bdd->query($queryCategories);
 while ($cat = $reponseCategories->fetch()){
@@ -40,8 +40,8 @@ while ($cat = $reponseCategories->fetch()){
 $reponseCategories->closeCursor();
 
 //REQUETES PRODUITS
-$queryProduit = "SELECT * FROM produit WHERE idCat=(
-    SELECT idCat FROM categorie WHERE nom=:nomCategorie
+$queryProduit = "SELECT * FROM ad_produit WHERE idCat=(
+    SELECT idCat FROM ad_categorie WHERE nom=:nomCategorie
 )";
 $reponse = $bdd->prepare($queryProduit);
 $reponse->bindParam(':nomCategorie', $categorie);

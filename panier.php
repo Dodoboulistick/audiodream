@@ -40,7 +40,7 @@ require("fonctionPanier.php");
                 <tbody>
                 <?php
                     $reponse = $bdd->query('SELECT p.idProduit,nomP, quantite, prix 
-                    FROM produit p, appartenir a
+                    FROM ad_produit p, ad_appartenir a
                     WHERE a.idProduit = p.idProduit AND idCommande=1;');
                     $nbArticles = 0;
                     $prixTotal = 0;

@@ -1,18 +1,11 @@
-CREATE DATABASE IF NOT EXISTS audiodream;
-
-/* DROP TABLE categorie;
-DROP TABLE produit;
-DROP TABLE utilisateur;
-DROP TABLE commande;
-DROP TABLE appartenir; */
-
-CREATE TABLE categorie(
+use dodobwtdodob;
+CREATE TABLE ad_categorie(
     idCat INT NOT NULL AUTO_INCREMENT,
     nom VARCHAR(255),
     PRIMARY KEY(idCat)
 );
 
-CREATE TABLE produit(
+CREATE TABLE ad_produit(
     idProduit INT NOT NULL AUTO_INCREMENT,
     nomP VARCHAR(255),  
     prix FLOAT,
@@ -20,10 +13,10 @@ CREATE TABLE produit(
     stock INT,
     idCat INT,
     PRIMARY KEY(idProduit),
-    FOREIGN KEY fk_categorie(idCat) REFERENCES categorie(idCat)
+    FOREIGN KEY fk_categorie(idCat) REFERENCES ad_categorie(idCat)
 );
 
-CREATE TABLE utilisateur(
+CREATE TABLE ad_utilisateur(
     idUtilisateur INT NOT NULL AUTO_INCREMENT,
     pseudo VARCHAR(255) NOT NULL,
     prenom VARCHAR(255),
@@ -33,18 +26,18 @@ CREATE TABLE utilisateur(
     PRIMARY KEY(idUtilisateur)
 );
 
-CREATE TABLE commande(
+/* CREATE TABLE ad_commande(
     idCommande INT NOT NULL,
     idUtilisateur INT NOT NULL,
     PRIMARY KEY(idCommande),
-    FOREIGN KEY fk_utilisateur(idUtilisateur) REFERENCES utilisateur(idUtilisateur)
-);
+    FOREIGN KEY fk_utilisateur(idUtilisateur) REFERENCES ad_utilisateur(idUtilisateur)
+); */
 
-CREATE TABLE appartenir(
+CREATE TABLE ad_appartenir(
     idCommande INT NOT NULL,
     idProduit INT NOT NULL,
     quantite INT,  
     PRIMARY KEY(idCommande,idProduit),
-    FOREIGN KEY fk_commande(idCommande) REFERENCES commande(idCommande),
-    FOREIGN KEY fk_produit(idProduit) REFERENCES produit(idProduit)
+    /* FOREIGN KEY fk_commande(idCommande) REFERENCES ad_commande(idCommande), */
+    FOREIGN KEY fk_produit(idProduit) REFERENCES ad_produit(idProduit)
 );

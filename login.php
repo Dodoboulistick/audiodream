@@ -83,6 +83,7 @@ function verifyInput($var){
         </div>
 
         <button class="w-100 btn btn-lg btn-primary" id="connexion" type="submit">Se connecter</button>
+        <p class="my-2 text-muted fs-italic">Vous pouvez vous connecter avec l'adresse 'root' et le mot de passe 'root'</p>
         <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
       </form>
     </main>

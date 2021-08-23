@@ -24,13 +24,13 @@ function ajouterArticle($idProd,$qteP){
    //Si le produit existe déjà on ajoute seulement la quantité
 
    //Comptage des produits déjà dans la commande
-   $reqProduit = "SELECT count(*),quantite FROM appartenir WHERE idCommande=1 AND idProduit=$idProd";
+   $reqProduit = "SELECT count(*),quantite FROM ad_appartenir WHERE idCommande=1 AND idProduit=$idProd";
    $reponseProduit = $bdd->query($reqProduit);
    $fetchProduit = $reponseProduit->fetch();
    $reponseProduit->closeCursor();
 
    //Check de la quantité des produits dans le stock des produits
-   $checkQte = "SELECT stock FROM produit WHERE idProduit=$idProd";
+   $checkQte = "SELECT stock FROM ad_produit WHERE idProduit=$idProd";
    $reponseCheck = $bdd->query($checkQte); 
    $fetchQte = $reponseCheck->fetch();
    $reponseCheck->closeCursor();
@@ -45,14 +45,14 @@ function ajouterArticle($idProd,$qteP){
    //Vérifications
    if((!($nouvelleQuantiteStock < 0)) && ($qteP > 0)){
       if ($nbProduit == 0){//si le produit n'y est pas
-         $siqueryProduit = "INSERT INTO appartenir VALUES (1,$idProd,$qteP)";
+         $siqueryProduit = "INSERT INTO ad_appartenir VALUES (1,$idProd,$qteP)";
          $bdd->exec($siqueryProduit);
-         $bdd->exec("UPDATE produit SET stock=$nouvelleQuantiteStock WHERE idProduit=$idProd");
+         //$bdd->exec("UPDATE ad_produit SET stock=$nouvelleQuantiteStock WHERE idProduit=$idProd");
       }else{
          //Sinon on modifie
-         $sinonqueryProduit = "UPDATE appartenir SET quantite=$nouvelleQuantiteAchat WHERE idCommande=1 AND idProduit=$idProd";
+         $sinonqueryProduit = "UPDATE ad_appartenir SET quantite=$nouvelleQuantiteAchat WHERE idCommande=1 AND idProduit=$idProd";
          $bdd->exec($sinonqueryProduit);
-         $bdd->exec("UPDATE produit SET stock=$nouvelleQuantiteStock WHERE idProduit=$idProd");
+         $bdd->exec("UPDATE ad_produit SET stock=$nouvelleQuantiteStock WHERE idProduit=$idProd");
       }
    } else {
       die("Une erreur est survenue.");
@@ -65,14 +65,14 @@ function supprimerArticle($idProd){
    $bdd = Database::connect();
 
    //Comptage des produits déjà dans la commande
-   $reqProduit = "SELECT quantite FROM appartenir WHERE idCommande=1 AND idProduit=$idProd";
+   $reqProduit = "SELECT quantite FROM ad_appartenir WHERE idCommande=1 AND idProduit=$idProd";
    $reponseProduit = $bdd->query($reqProduit);
    $fetchProduit = $reponseProduit->fetch();
    $reponseProduit->closeCursor();
    $quantiteCommande = (int)$fetchProduit['quantite'];
 
    //Comptage des stocks dans produit
-   $reqStock = "SELECT stock,prix FROM produit WHERE idProduit=$idProd";
+   $reqStock = "SELECT stock,prix FROM ad_produit WHERE idProduit=$idProd";
    $reponseStock = $bdd->query($reqStock);
    $fetchStock = $reponseStock->fetch();
    $reponseStock->closeCursor();
@@ -81,10 +81,10 @@ function supprimerArticle($idProd){
    $nouveauStockProduit = $quantiteCommande + $quantiteProduit;
 
    //suppression du produit dans la commande
-   $queryProduit = "DELETE FROM appartenir WHERE idCommande=1 AND idProduit=$idProd";
+   $queryProduit = "DELETE FROM ad_appartenir WHERE idCommande=1 AND idProduit=$idProd";
    $bdd->exec($queryProduit);
    //mais rajout de la quantité dans les produits (il faut bien les reposer quand même!)
-   $bdd->exec("UPDATE produit SET stock=$nouveauStockProduit WHERE idProduit=$idProd");
+   //$bdd->exec("UPDATE ad_produit SET stock=$nouveauStockProduit WHERE idProduit=$idProd");
 
    //données à récupérer dans l'ajax pour mettre a jour le prix total/nb d'article en direct
    $prix = floatval($fetchStock['prix'])*$quantiteCommande;
@@ -98,7 +98,7 @@ function supprimerArticle($idProd){
 function supprimerCommande(){
    $bdd = Database::connect();
    //suppression de tous les produits dans la commande
-   $querySuppr = "DELETE FROM appartenir WHERE idCommande=1";
+   $querySuppr = "DELETE FROM ad_appartenir WHERE idCommande=1";
    $bdd->exec($querySuppr);
    Database::disconnect();
 }
